@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiran Sudha — Coming Soon</title>
+  <meta name="description" content="Kiran Sudha — Heritage, reimagined. The legacy fashion of India's states, reworked with a modern touch. Our storefront opens soon.">
+  <meta name="theme-color" content="#2C4727">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kiran Sudha — Coming Soon">
+  <meta property="og:description" content="Heritage, reimagined. India's legacy fashion, reworked with a modern touch.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts: Fraunces (heritage serif) + Jost (geometric UI sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="frame">
+
+    <!-- Masthead -->
+    <header class="masthead reveal d1">
+      <div class="wordmark">Kiran&nbsp;Sudha<span class="dot" aria-hidden="true"></span></div>
+    </header>
+
+    <!-- Hero -->
+    <main class="hero">
+      <p class="eyebrow reveal d2">Heritage&nbsp;·&nbsp;Reimagined</p>
+
+      <!-- Embroidery-inspired buti motif (forest petals, vermilion seed) -->
+      <svg class="motif reveal d2" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M24 3c3 9 12 18 21 21-9 3-18 12-21 21-3-9-12-18-21-21 9-3 18-12 21-21Z"
+              stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <circle cx="24" cy="24" r="4.2" stroke="currentColor" stroke-width="1.3"/>
+        <circle class="seed" cx="24" cy="24" r="1.5" fill="currentColor"/>
+      </svg>
+
+      <h1 class="headline reveal d3">Something <em>timeless</em><br>is on its way.</h1>
+
+      <p class="lede reveal d4">
+        We're reweaving the <b>legacy fashion of India's states</b> — its centuries-old
+        craft, reworked with a modern touch — into a new testimony. The Kiran&nbsp;Sudha
+        storefront opens soon. Leave your email and we'll tell you the moment the doors open.
+      </p>
+
+      <!-- Notify form → emails submissions to kiransudhaclothing@gmail.com via FormSubmit -->
+      <form class="notify reveal d5" id="notifyForm"
+            action="https://formsubmit.co/kiransudhaclothing@gmail.com" method="POST" novalidate>
+        <input type="email" id="email" name="email" placeholder="you@example.com"
+               autocomplete="email" aria-label="Email address" required>
+        <button type="submit" class="btn" id="notifyBtn">Notify Me</button>
+
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New Coming Soon signup — Kiran Sudha">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Honeypot anti-spam field -->
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </form>
+      <p class="form-note reveal d5" id="formNote">No spam — just one note when we open the doors.</p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="foot reveal d6">
+      <nav class="social" aria-label="Social media">
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 4h-2.2A3.3 3.3 0 0 0 9.5 7.3V10H7v3h2.5v8h3v-8H15l.5-3h-3V7.6c0-.5.4-.9.9-.9H15V4Z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" title="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.5 9.2v5.6l4.8-2.8-4.8-2.8Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Pinterest" title="Pinterest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a9 9 0 0 0-3.3 17.4c-.1-.8-.2-2 0-2.9l1.1-4.8s-.3-.6-.3-1.4c0-1.3.8-2.3 1.7-2.3.8 0 1.2.6 1.2 1.4 0 .8-.5 2-.8 3.2-.2.9.5 1.7 1.4 1.7 1.7 0 2.9-2.2 2.9-4.8 0-2-1.3-3.5-3.8-3.5a4 4 0 0 0-4.1 4c0 .8.2 1.4.6 1.8.1.2.2.3.1.5l-.2.9c-.1.3-.3.4-.6.2-1.1-.5-1.7-1.8-1.7-3.4 0-2.6 2-5 5.7-5 3 0 5.3 2.1 5.3 5 0 3-1.8 5.3-4.4 5.3-.9 0-1.7-.5-2-1l-.6 2.2c-.2.8-.7 1.7-1 2.3A9 9 0 1 0 12 3Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+      </nav>
+      <p class="legal">
+        © <span id="year">2026</span> Kiran Sudha
+        <span>·</span> India's legacy fashion, reimagined for today
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Notify form — AJAX submit to FormSubmit so the page stays put and shows
+    // an inline confirmation. Falls back to a normal POST if JS is unavailable.
+    (function () {
+      var form  = document.getElementById('notifyForm');
+      var note  = document.getElementById('formNote');
+      var input = document.getElementById('email');
+      var btn   = document.getElementById('notifyBtn');
+      var honey = form.querySelector('[name="_honey"]');
+      var ENDPOINT = 'https://formsubmit.co/ajax/kiransudhaclothing@gmail.com';
+
+      function setNote(msg, type) {
+        note.textContent = msg;
+        note.classList.remove('success', 'error');
+        if (type) note.classList.add(type);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (honey && honey.value) return;            // bot trap
+
+        var value = (input.value || '').trim();
+        var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (!valid) {
+          setNote('Please enter a valid email address.', 'error');
+          input.focus();
+          return;
+        }
+
+        var original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        setNote('');
+
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            email: value,
+            _subject: 'New Coming Soon signup — Kiran Sudha',
+            _template: 'table',
+            _captcha: 'false'
+          })
+        })
+        .then(function (res) { return res.json().catch(function () { return {}; }); })
+        .then(function (data) {
+          if (data && (data.success === true || data.success === 'true')) {
+            setNote('Thank you — you’re on the list. We’ll be in touch soon.', 'success');
+            form.reset();
+          } else {
+            setNote('Thanks! Please check your inbox to confirm your email.', 'success');
+            form.reset();
+          }
+        })
+        .catch(function () {
+          setNote('Something went wrong — please try again in a moment.', 'error');
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = original;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
