@@ -1,0 +1,232 @@
+/* ============================================================
+   Kiran Sudha — Coming Soon
+   styles.css
+   Built on the Kiran Sudha design system (v1.1, logo-aligned).
+   Brand: Forest Green #2C4727 + Vermilion #CE3B33 dot,
+   warm ivory canvas, gold + maroon accents, Fraunces + Jost.
+   ============================================================ */
+
+:root{
+  /* Foundations & surfaces */
+  --ivory:#F8F3EA; --paper:#FFFFFF; --panel:#F2EADC; --panel-2:#EDE3D2;
+  /* Ink & lines */
+  --ink:#241C14; --ink-2:#4A4034; --ink-soft:#7A6E5E; --line:#E6DCC9; --line-2:#D8CBB3;
+  /* Brand — logo-aligned */
+  --forest:#2C4727; --forest-hover:#3C5A34; --forest-deep:#1E2E18;
+  --vermilion:#CE3B33; --gold:#AD863B; --maroon:#7E2E3B;
+  /* Functional */
+  --success:#2E6B4C;
+  /* Type */
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* Form */
+  --shadow:0 8px 30px rgba(30,38,16,.12); --shadow-sm:0 4px 14px rgba(30,38,16,.08);
+  --r:14px; --r-sm:9px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+html{-webkit-text-size-adjust:100%;}
+
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--ivory);
+  /* Soft heritage glow — extremely subtle, lets foundations carry the screen */
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, #FCF8F0 0%, rgba(252,248,240,0) 55%),
+    radial-gradient(90% 60% at 85% 115%, #ECF0E4 0%, rgba(236,240,228,0) 60%);
+  background-attachment:fixed;
+  min-height:100vh;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  display:flex;
+  justify-content:center;
+  padding:clamp(14px,3vw,34px);
+}
+
+/* ---- Editorial inset frame ---- */
+.frame{
+  position:relative;
+  width:100%;
+  max-width:980px;
+  min-height:calc(100vh - clamp(28px,6vw,68px));
+  display:flex;
+  flex-direction:column;
+  padding:clamp(28px,5vw,64px) clamp(22px,5vw,72px);
+  border:1px solid var(--line-2);
+  border-radius:var(--r);
+  background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0) 40%);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+/* Hairline forest keyline */
+.frame::before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid rgba(44,71,39,.22);
+  border-radius:calc(var(--r) - 5px);
+  pointer-events:none;
+}
+
+/* ---- Masthead ---- */
+.masthead{display:flex;justify-content:center;align-items:center;z-index:1;}
+.wordmark{
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  font-weight:500;
+  font-size:clamp(1.05rem,2.2vw,1.4rem);
+  letter-spacing:.14em;
+  color:var(--ink);
+  display:inline-flex;
+  align-items:baseline;
+  gap:.05em;
+}
+/* The single vermilion dot from the logo */
+.wordmark .dot{
+  width:.34em;height:.34em;
+  border-radius:50%;
+  background:var(--vermilion);
+  display:inline-block;
+  margin-left:.18em;
+  transform:translateY(-.02em);
+}
+
+/* ---- Hero ---- */
+.hero{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:1.25rem;
+  padding:clamp(2rem,6vw,3.6rem) 0;
+  z-index:1;
+}
+
+.eyebrow{
+  font-size:.72rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+}
+
+/* Embroidery-inspired buti motif */
+.motif{display:block;width:38px;height:38px;color:var(--forest);}
+.motif .seed{color:var(--vermilion);}
+
+.headline{
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  font-variation-settings:"opsz" 144;
+  font-weight:500;
+  font-size:clamp(2.6rem,7vw,4.6rem);
+  line-height:1.04;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  max-width:14ch;
+}
+.headline em{font-style:italic;font-weight:500;color:var(--forest);}
+
+.lede{
+  font-size:clamp(1rem,1.4vw,1.12rem);
+  line-height:1.75;
+  color:var(--ink-soft);
+  max-width:48ch;
+}
+.lede b{color:var(--ink-2);font-weight:500;}
+
+/* ---- Notify form ---- */
+.notify{display:flex;gap:.6rem;width:100%;max-width:460px;margin-top:.4rem;}
+.notify input[type="email"]{
+  flex:1;
+  font-family:var(--sans);
+  font-size:.95rem;
+  color:var(--ink);
+  background:var(--paper);
+  border:1px solid var(--line-2);
+  border-radius:var(--r-sm);
+  padding:.85rem 1rem;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.notify input[type="email"]::placeholder{color:var(--ink-soft);opacity:.8;}
+.notify input[type="email"]:focus{
+  outline:none;
+  border-color:var(--forest);
+  box-shadow:0 0 0 3px rgba(44,71,39,.14);
+}
+/* Honeypot — hidden from humans, catches bots */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;}
+
+.btn{
+  font-family:var(--sans);
+  font-size:.8rem;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--paper);
+  background:var(--forest);
+  border:1px solid var(--forest);
+  border-radius:var(--r-sm);
+  padding:.85rem 1.6rem;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:background-color .2s ease, transform .15s ease, opacity .2s ease;
+}
+.btn:hover{background:var(--forest-hover);border-color:var(--forest-hover);}
+.btn:active{transform:translateY(1px);}
+.btn:disabled{opacity:.6;cursor:default;}
+
+.form-note{
+  font-size:.78rem;
+  color:var(--ink-soft);
+  letter-spacing:.01em;
+  min-height:1.1rem;
+  transition:color .2s ease;
+}
+.form-note.success{color:var(--success);font-weight:500;}
+.form-note.error{color:var(--vermilion);font-weight:500;}
+
+/* ---- Footer ---- */
+.foot{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--line);
+  z-index:1;
+}
+.social{display:flex;gap:1.4rem;align-items:center;}
+.social a{color:var(--ink-soft);display:inline-flex;transition:color .2s ease, transform .2s ease;}
+.social a:hover{color:var(--forest);transform:translateY(-2px);}
+.social svg{width:19px;height:19px;display:block;}
+.legal{font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-align:center;}
+.legal span{color:var(--line-2);margin:0 .5rem;}
+
+/* ---- Entrance animation ---- */
+.reveal{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
+.reveal.d1{animation-delay:.05s;}
+.reveal.d2{animation-delay:.16s;}
+.reveal.d3{animation-delay:.28s;}
+.reveal.d4{animation-delay:.4s;}
+.reveal.d5{animation-delay:.52s;}
+.reveal.d6{animation-delay:.64s;}
+@keyframes rise{to{opacity:1;transform:translateY(0);}}
+
+@media (prefers-reduced-motion:reduce){
+  .reveal{animation:none;opacity:1;transform:none;}
+  body{background-attachment:scroll;}
+}
+
+/* ---- Responsive ---- */
+@media (max-width:560px){
+  .notify{flex-direction:column;}
+  .btn{padding:.9rem 1.6rem;}
+  .headline{max-width:none;}
+  .frame::before{inset:7px;}
+}
