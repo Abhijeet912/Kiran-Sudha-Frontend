@@ -1,19 +1,55 @@
-export default function Home() {
+import {
+  getFeaturedTestimonials,
+  getHeroBanners,
+  getSaleBanners,
+  getVaultArticles,
+} from "@/lib/api/content";
+import { getArtForms, getBestSellers } from "@/lib/api/catalog";
+import HeroCarousel from "@/components/home/HeroCarousel";
+import SaleStrip from "@/components/home/SaleStrip";
+import BestSellers from "@/components/home/BestSellers";
+import ArtFormsGrid from "@/components/home/ArtFormsGrid";
+import Testimonials from "@/components/home/Testimonials";
+import VaultBanner from "@/components/home/VaultBanner";
+
+/** Normalize Spring Page vs plain array responses. */
+const asList = (data) => (Array.isArray(data) ? data : data?.content || []);
+
+/** Fetch all homepage datasets in parallel; a failed call = empty section. */
+async function getHomeData() {
+  const [hero, sale, bestSellers, artForms, testimonials, vault] =
+    await Promise.allSettled([
+      getHeroBanners(),
+      getSaleBanners(),
+      getBestSellers(8),
+      getArtForms(),
+      getFeaturedTestimonials(),
+      getVaultArticles({ size: 3 }),
+    ]);
+
+  const value = (r) => (r.status === "fulfilled" ? asList(r.value) : []);
+
+  return {
+    heroBanners: value(hero),
+    saleBanners: value(sale),
+    bestSellers: value(bestSellers),
+    artForms: value(artForms),
+    testimonials: value(testimonials),
+    vaultArticles: value(vault),
+  };
+}
+
+export default async function Home() {
+  const data = await getHomeData();
+
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-5 px-6 py-24 text-center">
-      <p className="text-sm uppercase tracking-[0.35em] text-gold">
-        Kiran Sudha
-      </p>
-      <h1 className="font-display text-4xl text-forest md:text-5xl">
-        India&apos;s legacy, worn anew.
-      </h1>
-      <p className="max-w-md text-lg text-ink/70">
-        The storefront is being handcrafted — one thread at a time.
-      </p>
-      <span
-        className="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-vermilion"
-        aria-hidden
-      />
+    <main>
+      <HeroCarousel banners={data.heroBanners} />
+      <SaleStrip banners={data.saleBanners} />
+      <BestSellers products={data.bestSellers} />
+      <ArtFormsGrid artForms={data.artForms} />
+      <Testimonials reviews={data.testimonials} />
+      <VaultBanner articles={data.vaultArticles} />
     </main>
   );
 }
