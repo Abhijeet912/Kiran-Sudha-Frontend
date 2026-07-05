@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/*
+ * Kiran Sudha — design tokens (design-system v1.1, logo-aligned palette)
+ * Primary: Forest Green — links, primary buttons, nav, dark sections
+ * Accent "dot": Vermilion — sale prices, discount tags, wishlist heart
+ */
+@theme {
+  /* Brand palette */
+  --color-forest: #2c4727;
+  --color-forest-hover: #3c5a34;
+  --color-vermilion: #ce3b33;
+  --color-ivory: #f8f3ea;
+  --color-cream: #f3ebd8;
+  --color-gold: #ad863b;
+  --color-maroon: #7e2e3b;
+  --color-success: #2e6b4c;
+  --color-footer: #1e2e18;
+  --color-ink: #24281f;
+
+  /* Typography */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-jost), system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+}
