@@ -1,6 +1,10 @@
 import { Fraunces, Jost } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
+import { LocationProvider } from "@/context/LocationContext";
 import { ToastProvider } from "@/context/ToastContext";
+import AnnouncementBar from "@/components/layout/AnnouncementBar";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -30,7 +34,14 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-ivory font-body text-ink">
         <ToastProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <LocationProvider>
+              <AnnouncementBar />
+              <Navbar />
+              <div className="flex flex-1 flex-col">{children}</div>
+              <Footer />
+            </LocationProvider>
+          </AuthProvider>
         </ToastProvider>
       </body>
     </html>
