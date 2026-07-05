@@ -1,0 +1,34 @@
+import { Fraunces, Jost } from "next/font/google";
+import "./globals.css";
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+});
+
+const jost = Jost({
+  variable: "--font-jost",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: {
+    default: "Kiran Sudha — India's Legacy, Worn Anew",
+    template: "%s | Kiran Sudha",
+  },
+  description:
+    "Kiran Sudha brings traditional fashion from the states of India — Chikankari, Bandhani, Phulkari and more — reimagined with a modern touch.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${jost.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-ivory font-body text-ink">
+        {children}
+      </body>
+    </html>
+  );
+}
