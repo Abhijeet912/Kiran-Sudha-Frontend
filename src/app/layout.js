@@ -1,4 +1,6 @@
 import { Fraunces, Jost } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
+import { ToastProvider } from "@/context/ToastContext";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -27,7 +29,9 @@ export default function RootLayout({ children }) {
       className={`${fraunces.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory font-body text-ink">
-        {children}
+        <ToastProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   );
