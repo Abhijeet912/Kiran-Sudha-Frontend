@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import { useLocation } from "@/context/LocationContext";
 import { useToast } from "@/context/ToastContext";
 import { getTopLevelCategories, getStates } from "@/lib/api/catalog";
@@ -24,6 +25,7 @@ const asList = (data) =>
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const { count: cartCount } = useCart();
   const { pincode, serviceable, openModal } = useLocation();
   const toast = useToast();
   const router = useRouter();
@@ -232,8 +234,17 @@ export default function Navbar() {
                 </Link>
 
                 {/* Cart — logged-in users only (per nav spec) */}
-                <Link href="/cart" aria-label="Cart" className={iconButton}>
+                <Link
+                  href="/cart"
+                  aria-label={`Cart${cartCount > 0 ? ` (${cartCount} items)` : ""}`}
+                  className={iconButton}
+                >
                   <CartIcon className="h-5 w-5" />
+                  {cartCount > 0 && (
+                    <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-forest px-1 text-[10px] font-semibold leading-none text-ivory">
+                      {cartCount > 9 ? "9+" : cartCount}
+                    </span>
+                  )}
                 </Link>
               </>
             )}
