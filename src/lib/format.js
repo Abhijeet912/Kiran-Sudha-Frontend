@@ -19,6 +19,18 @@ export function discountPercent(price, discountPrice) {
   return Math.round(((p - d) / p) * 100);
 }
 
+/** "12 Jul 2026" style date for orders, reviews, notifications. */
+export function formatDate(value) {
+  if (!value) return "";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return String(value);
+  return d.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 /** First (primary) product image URL, defensively. */
 export function primaryImageUrl(product) {
   if (!product) return null;
