@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getArtForm, getProductsByArtForm } from "@/lib/api/catalog";
 import {
   PAGE_SIZE,
+  decodeParam,
   normalizeParams,
   parseListing,
   sortToApi,
@@ -13,7 +14,8 @@ import ProductGrid from "@/components/product/ProductGrid";
 import Pagination from "@/components/product/Pagination";
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   try {
     const art = await getArtForm(slug);
     if (art) {
@@ -31,7 +33,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ArtFormPage({ params, searchParams }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   const sp = normalizeParams(await searchParams);
   const { page, sort } = parseListing(sp);
 
