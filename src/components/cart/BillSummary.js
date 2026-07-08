@@ -15,16 +15,16 @@ function Row({ label, value, accent }) {
 
 /**
  * Bill breakup card (design-system bill pattern):
- * subtotal → coupon discount → GST → delivery → estimated total.
+ * subtotal → coupon discount → delivery → estimated total.
+ * Prices are MRP — GST is INCLUDED, shown as an informational breakup only.
  */
 export default function BillSummary({ cart, coupon, subtotal, showCta = true }) {
-  const gst = cart?.gst ?? cart?.gstAmount ?? null;
   const delivery = cart?.deliveryCharge ?? null;
   const discount = coupon?.discountAmount || 0;
+  // Informational only — the GST component already inside the price.
+  const includedGst = cart?.gst ?? cart?.gstAmount ?? null;
 
-  const baseTotal =
-    cart?.totalAmount ??
-    subtotal + (Number(gst) || 0) + (Number(delivery) || 0);
+  const baseTotal = cart?.totalAmount ?? subtotal + (Number(delivery) || 0);
   const estimatedTotal = Math.max(0, baseTotal - discount);
 
   return (
@@ -38,7 +38,7 @@ export default function BillSummary({ cart, coupon, subtotal, showCta = true }) 
       </h2>
 
       <div className="mt-4 flex flex-col gap-2.5">
-        <Row label="Subtotal" value={formatINR(subtotal)} />
+        <Row label="Subtotal (incl. GST)" value={formatINR(subtotal)} />
         {discount > 0 && (
           <Row
             label={`Coupon (${coupon.code})`}
@@ -46,7 +46,6 @@ export default function BillSummary({ cart, coupon, subtotal, showCta = true }) 
             accent="font-medium text-success"
           />
         )}
-        {gst != null && <Row label="GST" value={formatINR(gst)} />}
         {delivery != null && (
           <Row
             label="Delivery"
@@ -67,9 +66,14 @@ export default function BillSummary({ cart, coupon, subtotal, showCta = true }) 
           {formatINR(estimatedTotal)}
         </span>
       </div>
+      {includedGst != null && Number(includedGst) > 0 && (
+        <p className="mt-1.5 text-[11px] leading-4 text-ink/50">
+          Includes GST of {formatINR(includedGst)}
+        </p>
+      )}
       <p className="mt-1.5 text-[11px] leading-4 text-ink/40">
-        Final bill (incl. GST &amp; delivery for your address) is confirmed at
-        checkout.
+        Prices are inclusive of GST. Delivery charge (if any) for your address
+        is confirmed at checkout.
       </p>
 
       {showCta && (
