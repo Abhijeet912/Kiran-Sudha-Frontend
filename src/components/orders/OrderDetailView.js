@@ -257,7 +257,10 @@ function OrderDetailContent({ orderId }) {
           </h2>
           <div className="mt-2.5 flex flex-col gap-2">
             {order.subtotal != null && (
-              <BillRow label="Subtotal" value={formatINR(order.subtotal)} />
+              <BillRow
+                label="Subtotal (incl. GST)"
+                value={formatINR(order.subtotal)}
+              />
             )}
             {Number(order.couponDiscount) > 0 && (
               <BillRow
@@ -265,9 +268,6 @@ function OrderDetailContent({ orderId }) {
                 value={`− ${formatINR(order.couponDiscount)}`}
                 accent="font-medium text-success"
               />
-            )}
-            {order.gst != null && (
-              <BillRow label="GST" value={formatINR(order.gst)} />
             )}
             {order.deliveryCharge != null && (
               <BillRow
@@ -287,12 +287,26 @@ function OrderDetailContent({ orderId }) {
                 {formatINR(order.totalAmount)}
               </span>
             </div>
+            {order.gst != null && Number(order.gst) > 0 && (
+              <p className="text-[11px] text-ink/50">
+                Includes GST of {formatINR(order.gst)} · Prices inclusive of
+                all taxes
+              </p>
+            )}
             <p className="text-xs text-ink/50">
               {order.paymentMethod === "COD"
                 ? "Cash on Delivery"
                 : "Paid online"}
               {order.paymentStatus ? ` · ${order.paymentStatus}` : ""}
             </p>
+            {status !== "PENDING_PAYMENT" && status !== "CANCELLED" && (
+              <Link
+                href={`/orders/${order.id}/invoice`}
+                className="mt-1 inline-block text-xs font-medium text-forest underline-offset-4 hover:underline"
+              >
+                Download invoice ↓
+              </Link>
+            )}
           </div>
         </section>
       </div>
