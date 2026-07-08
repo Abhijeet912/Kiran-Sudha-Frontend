@@ -37,12 +37,18 @@ export default function MobileMenu({ open, onClose, categories, states }) {
       />
       <div className="absolute inset-y-0 left-0 flex w-80 max-w-[85vw] flex-col overflow-y-auto bg-ivory p-5 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
-          <span className="flex items-baseline gap-1.5">
-            <span className="font-display text-xl text-forest">Kiran Sudha</span>
-            <span
-              aria-hidden
-              className="inline-block h-1.5 w-1.5 rounded-full bg-vermilion"
-            />
+          <span className="flex items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.svg" alt="" className="h-8 w-8 rounded-full" />
+            <span className="flex items-baseline gap-1.5">
+              <span className="font-display text-xl text-forest">
+                Kiran Sudha
+              </span>
+              <span
+                aria-hidden
+                className="inline-block h-1.5 w-1.5 rounded-full bg-vermilion"
+              />
+            </span>
           </span>
           <button aria-label="Close" onClick={onClose} className="text-ink/60">
             <XIcon className="h-6 w-6" />
