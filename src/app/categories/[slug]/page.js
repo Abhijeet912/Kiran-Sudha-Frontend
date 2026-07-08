@@ -8,6 +8,7 @@ import {
 } from "@/lib/api/catalog";
 import {
   PAGE_SIZE,
+  decodeParam,
   filterApiParams,
   findCategoryBySlug,
   normalizeParams,
@@ -20,7 +21,8 @@ import ProductGrid from "@/components/product/ProductGrid";
 import Pagination from "@/components/product/Pagination";
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   try {
     const category = findCategoryBySlug(await getTopLevelCategories(), slug);
     if (category) {
@@ -38,7 +40,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CategoryPage({ params, searchParams }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   const sp = normalizeParams(await searchParams);
   const { page, sort, filters } = parseListing(sp);
 
