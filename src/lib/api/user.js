@@ -15,3 +15,10 @@ export const getUnreadCount = () =>
 
 export const markAllNotificationsRead = () =>
   apiFetch("/api/notifications/read-all", { method: "PATCH", auth: true });
+
+// ---------- Recently viewed ----------
+export const getRecentlyViewed = () =>
+  apiFetch("/api/recently-viewed", { auth: true });
+
+export const trackProductView = (productId) =>
+  apiFetch(`/api/recently-viewed/${productId}`, { method: "POST", auth: true });
