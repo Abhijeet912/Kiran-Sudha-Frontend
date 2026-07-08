@@ -1,4 +1,10 @@
 import Link from "next/link";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  PinterestIcon,
+  YoutubeIcon,
+} from "@/components/ui/Icons";
 
 const SHOP_LINKS = [
   { href: "/products", label: "Shop All" },
@@ -22,10 +28,10 @@ const POLICY_LINKS = [
 ];
 
 const SOCIALS = [
-  { href: "https://www.facebook.com", label: "Facebook" },
-  { href: "https://www.instagram.com", label: "Instagram" },
-  { href: "https://www.youtube.com", label: "YouTube" },
-  { href: "https://www.pinterest.com", label: "Pinterest" },
+  { href: "https://www.facebook.com", label: "Facebook", Icon: FacebookIcon },
+  { href: "https://www.instagram.com", label: "Instagram", Icon: InstagramIcon },
+  { href: "https://www.youtube.com", label: "YouTube", Icon: YoutubeIcon },
+  { href: "https://www.pinterest.com", label: "Pinterest", Icon: PinterestIcon },
 ];
 
 function LinkColumn({ title, links }) {
@@ -67,16 +73,18 @@ export default function Footer() {
             Traditional fashion from the states of India — Chikankari,
             Bandhani, Phulkari and more — woven anew with a modern touch.
           </p>
-          <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-            {SOCIALS.map((s) => (
-              <li key={s.label}>
+          <ul className="mt-5 flex items-center gap-2">
+            {SOCIALS.map(({ href, label, Icon }) => (
+              <li key={label}>
                 <a
-                  href={s.href}
+                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-ivory/70 underline-offset-4 transition-colors hover:text-ivory hover:underline"
+                  aria-label={label}
+                  title={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-ivory/70 ring-1 ring-ivory/15 transition-colors hover:bg-ivory/10 hover:text-ivory"
                 >
-                  {s.label}
+                  <Icon className="h-4.5 w-4.5" />
                 </a>
               </li>
             ))}
