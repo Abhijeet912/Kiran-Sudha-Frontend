@@ -58,7 +58,7 @@ function LinkColumn({ title, links }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-footer text-ivory">
+    <footer className="bg-footer text-ivory print:hidden">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
         {/* Brand */}
         <div>
