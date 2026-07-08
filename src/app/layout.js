@@ -19,12 +19,19 @@ const jost = Jost({
 });
 
 export const metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
   title: {
     default: "Kiran Sudha — India's Legacy, Worn Anew",
     template: "%s | Kiran Sudha",
   },
   description:
     "Kiran Sudha brings traditional fashion from the states of India — Chikankari, Bandhani, Phulkari and more — reimagined with a modern touch.",
+  openGraph: {
+    siteName: "Kiran Sudha",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {
