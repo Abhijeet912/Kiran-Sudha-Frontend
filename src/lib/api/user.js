@@ -1,9 +1,22 @@
 /**
- * User account API — notifications now; profile, addresses and
- * recently-viewed join in the account phase (v9 §15–17).
+ * User account API — profile, password, addresses, notifications,
+ * recently-viewed (v9 §15–17).
  */
 
 import { apiFetch } from "./client";
+
+// ---------- Profile ----------
+export const getProfile = () => apiFetch("/api/users/profile", { auth: true });
+
+export const updateProfile = (payload) =>
+  apiFetch("/api/users/profile", { method: "PUT", body: payload, auth: true });
+
+export const changePassword = ({ currentPassword, newPassword, confirmPassword }) =>
+  apiFetch("/api/users/change-password", {
+    method: "PUT",
+    body: { currentPassword, newPassword, confirmPassword },
+    auth: true,
+  });
 
 // ---------- Notifications ----------
 export const getNotifications = (params) =>
@@ -15,6 +28,16 @@ export const getUnreadCount = () =>
 
 export const markAllNotificationsRead = () =>
   apiFetch("/api/notifications/read-all", { method: "PATCH", auth: true });
+
+export const markNotificationRead = (id) =>
+  apiFetch(`/api/notifications/${id}/read`, { method: "PATCH", auth: true });
+
+/** Tell listeners (navbar bell) the unread count changed. */
+export function emitNotificationsChange() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("ks:notifications-change"));
+  }
+}
 
 // ---------- Recently viewed ----------
 export const getRecentlyViewed = () =>
