@@ -37,6 +37,20 @@ export function firstParam(value) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+/**
+ * App Router dynamic params arrive URL-ENCODED (e.g. "Test%20slag").
+ * Decode before using them for API lookups or display — otherwise the
+ * API helper re-encodes and the backend sees a double-encoded slug.
+ */
+export function decodeParam(value) {
+  if (typeof value !== "string") return value;
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value; // malformed escape sequence — use as-is
+  }
+}
+
 /** Normalize a Next searchParams object into a plain {key: string} map. */
 export function normalizeParams(sp) {
   const out = {};
