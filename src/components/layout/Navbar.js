@@ -90,7 +90,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-ink/10 bg-ivory shadow-sm">
+      <header className="sticky top-0 z-40 border-b border-ink/10 bg-ivory shadow-sm print:hidden">
         {/* Click-away backdrop for dropdowns */}
         {dropdown && (
           <button
