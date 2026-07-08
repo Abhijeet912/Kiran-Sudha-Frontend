@@ -53,17 +53,23 @@ export default function Navbar() {
     };
   }, []);
 
-  // Unread notifications badge (bell icon).
+  // Unread notifications badge (bell icon) — refreshes when the
+  // notifications page marks items read ("ks:notifications-change").
   useEffect(() => {
     if (!isAuthenticated) return undefined;
     let cancelled = false;
-    getUnreadCount()
-      .then((data) => {
-        if (!cancelled) setUnread(data?.unreadCount ?? 0);
-      })
-      .catch(() => {});
+    const fetchUnread = () => {
+      getUnreadCount()
+        .then((data) => {
+          if (!cancelled) setUnread(data?.unreadCount ?? 0);
+        })
+        .catch(() => {});
+    };
+    fetchUnread();
+    window.addEventListener("ks:notifications-change", fetchUnread);
     return () => {
       cancelled = true;
+      window.removeEventListener("ks:notifications-change", fetchUnread);
     };
   }, [isAuthenticated]);
 
