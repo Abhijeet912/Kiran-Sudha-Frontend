@@ -22,3 +22,18 @@ export const getRecentlyViewed = () =>
 
 export const trackProductView = (productId) =>
   apiFetch(`/api/recently-viewed/${productId}`, { method: "POST", auth: true });
+
+// ---------- Addresses ----------
+export const getAddresses = () => apiFetch("/api/addresses", { auth: true });
+
+export const addAddress = (payload) =>
+  apiFetch("/api/addresses", { method: "POST", body: payload, auth: true });
+
+export const updateAddress = (id, payload) =>
+  apiFetch(`/api/addresses/${id}`, { method: "PUT", body: payload, auth: true });
+
+export const deleteAddress = (id) =>
+  apiFetch(`/api/addresses/${id}`, { method: "DELETE", auth: true });
+
+export const setDefaultAddress = (id) =>
+  apiFetch(`/api/addresses/${id}/set-default`, { method: "PATCH", auth: true });
