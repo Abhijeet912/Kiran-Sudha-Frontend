@@ -17,7 +17,7 @@ function Row({ label, value, accent }) {
  * Bill breakup card (design-system bill pattern):
  * subtotal → coupon discount → GST → delivery → estimated total.
  */
-export default function BillSummary({ cart, coupon, subtotal }) {
+export default function BillSummary({ cart, coupon, subtotal, showCta = true }) {
   const gst = cart?.gst ?? cart?.gstAmount ?? null;
   const delivery = cart?.deliveryCharge ?? null;
   const discount = coupon?.discountAmount || 0;
@@ -72,11 +72,13 @@ export default function BillSummary({ cart, coupon, subtotal }) {
         checkout.
       </p>
 
-      <Link href="/checkout" className="mt-5 block">
-        <Button size="lg" className="w-full">
-          Proceed to Checkout
-        </Button>
-      </Link>
+      {showCta && (
+        <Link href="/checkout" className="mt-5 block">
+          <Button size="lg" className="w-full">
+            Proceed to Checkout
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
