@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/api/catalog";
 import { getProductReviews, getRatingSummary } from "@/lib/api/reviews";
 import { discountPercent, formatINR, primaryImageUrl } from "@/lib/format";
+import { decodeParam } from "@/lib/listing";
 import ImageGallery from "@/components/product/ImageGallery";
 import PurchasePanel from "@/components/product/PurchasePanel";
 import DeliveryCheck from "@/components/product/DeliveryCheck";
@@ -11,7 +12,8 @@ import RecentlyViewedTracker from "@/components/product/RecentlyViewedTracker";
 import RatingStars from "@/components/product/RatingStars";
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   try {
     const p = await getProductBySlug(slug);
     if (p) {
@@ -31,7 +33,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProductPage({ params }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
 
   let product = null;
   try {
