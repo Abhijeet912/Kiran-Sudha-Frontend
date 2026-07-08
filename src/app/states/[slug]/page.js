@@ -7,6 +7,7 @@ import {
 } from "@/lib/api/catalog";
 import {
   PAGE_SIZE,
+  decodeParam,
   filterApiParams,
   normalizeParams,
   parseListing,
@@ -22,7 +23,8 @@ const findState = (states, slug) => states.find((s) => s.slug === slug) || null;
 const asList = (data) => (Array.isArray(data) ? data : data?.content || []);
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   try {
     const state = findState(asList(await getStates()), slug);
     if (state) {
@@ -40,7 +42,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function StatePage({ params, searchParams }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeParam(rawSlug);
   const sp = normalizeParams(await searchParams);
   const { page, sort, filters } = parseListing(sp);
 
