@@ -79,7 +79,7 @@ export default function PurchasePanel({ product }) {
     const next = !wishlisted;
     setWishlisted(next); // optimistic
     try {
-      await toggleWishlist(product.id);
+      await toggleWishlist(product.id, wishlisted);
       toast.success(next ? "Added to wishlist" : "Removed from wishlist");
     } catch (e) {
       setWishlisted(!next);
