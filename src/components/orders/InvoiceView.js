@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getOrder } from "@/lib/api/orders";
 import { formatDate, formatINR } from "@/lib/format";
+import { generateInvoicePdf } from "@/lib/invoice-pdf";
 import { SUPPORT_EMAIL } from "@/lib/static-content";
+import { useToast } from "@/context/ToastContext";
 import RequireAuth from "@/components/auth/RequireAuth";
 import Button from "@/components/ui/Button";
 import EmptyState from "@/components/ui/EmptyState";
@@ -37,7 +39,9 @@ function shippingInfo(order) {
 }
 
 function InvoiceContent({ orderId }) {
+  const toast = useToast();
   const [order, setOrder] = useState(null); // null loading | false error
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -98,6 +102,18 @@ function InvoiceContent({ orderId }) {
   const address = shippingInfo(order);
   const items = order.items || [];
 
+  async function handleDownload() {
+    setDownloading(true);
+    try {
+      await generateInvoicePdf(order);
+      toast.success("Invoice downloaded");
+    } catch {
+      toast.error("Could not generate the PDF. Please try again.");
+    } finally {
+      setDownloading(false);
+    }
+  }
+
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 print:max-w-none print:p-0">
       {/* Screen-only actions */}
@@ -108,8 +124,8 @@ function InvoiceContent({ orderId }) {
         >
           ← Back to order
         </Link>
-        <Button size="sm" onClick={() => window.print()}>
-          Download / Print PDF
+        <Button size="sm" loading={downloading} onClick={handleDownload}>
+          Download PDF
         </Button>
       </div>
 
