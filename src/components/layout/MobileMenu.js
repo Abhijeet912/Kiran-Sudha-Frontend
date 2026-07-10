@@ -1,31 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 import { useLocation } from "@/context/LocationContext";
 import SearchBar from "@/components/layout/SearchBar";
-import {
-  ChevronDownIcon,
-  MapPinIcon,
-  XIcon,
-} from "@/components/ui/Icons";
+import { ChevronDownIcon, MapPinIcon, XIcon } from "@/components/ui/Icons";
 
+/**
+ * Mobile drawer — NAVIGATION ONLY. Account actions (wishlist, orders,
+ * profile, notifications, logout) live under the profile icon in the top
+ * bar, so they are deliberately not repeated here.
+ */
 export default function MobileMenu({ open, onClose, categories, states }) {
-  const { user, isAuthenticated, logout } = useAuth();
   const { pincode, openModal } = useLocation();
-  const router = useRouter();
 
   if (!open) return null;
 
   const itemClass =
     "block rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-forest/5 hover:text-forest";
-
-  function handleLogout() {
-    logout();
-    onClose();
-    router.push("/");
-  }
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
@@ -125,45 +116,10 @@ export default function MobileMenu({ open, onClose, categories, states }) {
           </Link>
         </nav>
 
-        <div className="mt-6 border-t border-ink/10 pt-4">
-          {isAuthenticated ? (
-            <>
-              <p className="px-3 pb-2 text-sm font-medium text-forest">
-                Hi, {user?.firstName || "there"}
-              </p>
-              {[
-                { href: "/wishlist", label: "Wishlist" },
-                { href: "/orders", label: "My Orders" },
-                { href: "/cart", label: "Cart" },
-                { href: "/profile", label: "Profile & Addresses" },
-                { href: "/notifications", label: "Notifications" },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={onClose}
-                  className={itemClass}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <button
-                onClick={handleLogout}
-                className="mt-1 block w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium text-vermilion hover:bg-vermilion/5"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              href="/login"
-              onClick={onClose}
-              className="inline-flex h-11 w-full items-center justify-center rounded-full bg-forest text-sm font-medium text-ivory hover:bg-forest-hover"
-            >
-              Login / Register
-            </Link>
-          )}
-        </div>
+        <p className="mt-6 border-t border-ink/10 pt-4 text-xs leading-5 text-ink/50">
+          Wishlist, orders &amp; profile live under the profile icon in the
+          top bar.
+        </p>
       </div>
     </div>
   );
